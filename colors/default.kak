@@ -37,7 +37,7 @@ face global LineNumberCursor default,default+r
 face global MenuForeground white,blue
 face global MenuBackground blue,white
 face global MenuInfo cyan
-face global Information black,yellow
+face global Information white,black
 face global Error black,red
 face global DiagnosticError red
 face global DiagnosticWarning yellow

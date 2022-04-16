@@ -425,6 +425,17 @@ static constexpr StringView assistant_dilbert[] =
       R"(      @     )",
       R"(            )"};
 
+
+static constexpr StringView assistant_fbk[] =
+    { R"(  ,ｨﾍ     ,^\       )",
+      R"( //  \ _____})_     )",
+      R"( //ミ ∠    ヾ／ )   )",
+      R"(ｌl l＝/ 从ハ ハ从  )",
+      R"(ｌl l { ┃  \/ ┃ ﾚ ) )",
+      R"(/  }  f⌒ﾄ'''   '''ﾊ⌒)",
+      R"(￣￣￣￣￣￣￣￣￣￣)",
+      R"(                    )"};
+
 template<typename T> T sq(T x) { return x * x; }
 
 static sig_atomic_t resize_pending = 0;
@@ -1471,6 +1482,8 @@ void TerminalUI::set_ui_options(const Options& options)
         m_assistant = assistant_cat;
     else if (assistant == "dilbert")
         m_assistant = assistant_dilbert;
+    else if (assistant == "fbk")
+        m_assistant = assistant_fbk;
     else if (assistant == "none" or assistant == "off")
         m_assistant = ConstArrayView<StringView>{};
 
