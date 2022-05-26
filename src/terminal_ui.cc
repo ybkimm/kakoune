@@ -427,7 +427,8 @@ static constexpr StringView assistant_dilbert[] =
 
 
 static constexpr StringView assistant_fbk[] =
-    { R"(  ,ｨﾍ     ,^\       )",
+    { R"(                    )",
+      R"(  ,ｨﾍ     ,^\       )",
       R"( //  \ _____})_     )",
       R"( //ミ ∠    ヾ／ )   )",
       R"(ｌl l＝/ 从ハ ハ从  )",
@@ -879,6 +880,17 @@ Optional<Key> TerminalUI::get_next_key()
                               convert(static_cast<Codepoint>(params[0][1])));
         case 'Z': return shift(Key::Tab);
         case 'I': return {Key::FocusIn};
+        case 'K':
+            switch (params[0][0])
+            {
+                case 0: case '0':
+                    return Key{Key::EL0};
+                case 1:
+                    return Key{Key::EL1};
+                case 2:
+                    return Key{Key::EL2};
+            }
+            return {};
         case 'O': return {Key::FocusOut};
         case 'M': case 'm':
             const bool sgr = private_mode == '<';

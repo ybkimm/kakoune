@@ -82,6 +82,9 @@ static constexpr KeyAndName keynamemap[] = {
     { "percent", '%' },
     { "focus_in", Key::FocusIn },
     { "focus_out", Key::FocusOut },
+    { "el0", Key::EL0 },
+    { "el1", Key::EL1 },
+    { "el2", Key::EL2 },
 };
 
 KeyList parse_keys(StringView str)

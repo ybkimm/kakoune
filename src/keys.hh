@@ -68,6 +68,11 @@ struct Key
         FocusIn,
         FocusOut,
         Invalid,
+
+        // CSI Seq
+        EL0,
+        EL1,
+        EL2,
     };
 
     Modifiers modifiers = {};
