@@ -29,6 +29,10 @@ template<WordType word_type>
 Optional<Selection>
 select_to_previous_word(const Context& context, const Selection& selection);
 
+template<WordType word_type>
+Optional<Selection>
+select_to_word_begin(const Context& context, const Selection& selection);
+
 Optional<Selection>
 select_line(const Context& context, const Selection& selection);
 

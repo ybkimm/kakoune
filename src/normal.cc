@@ -2301,6 +2301,9 @@ static constexpr HashMap<Key, NormalCmd, MemoryDomain::Undefined, KeymapBackend>
     { {alt('E')}, {"extend to next WORD end", repeated<select<SelectMode::Extend, select_to_next_word_end<WORD>>>} },
     { {alt('B')}, {"extend to previous WORD start", repeated<select<SelectMode::Extend, select_to_previous_word<WORD>>>} },
 
+    { {ctrl('b')}, {"select to word begin", repeated<select<SelectMode::Replace, select_to_word_begin<Word>>>} },
+    { {ctrl('B')}, {"select to WORD begin", repeated<select<SelectMode::Replace, select_to_word_begin<WORD>>>} },
+
     { {alt('l')}, {"select to line end", repeated<select<SelectMode::Replace, select_to_line_end<false>>>} },
     { {alt('L')}, {"extend to line end", repeated<select<SelectMode::Extend, select_to_line_end<false>>>} },
     { {alt('h')}, {"select to line begin", repeated<select<SelectMode::Replace, select_to_line_begin<false>>>} },

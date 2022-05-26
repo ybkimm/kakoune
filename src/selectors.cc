@@ -141,6 +141,37 @@ template Optional<Selection> select_to_previous_word<WordType::WORD>(const Conte
 
 template<WordType word_type>
 Optional<Selection>
+select_to_word_begin(const Context& context, const Selection& selection)
+{
+    auto extra_word_chars = get_extra_word_chars(context);
+    auto& buffer = context.buffer();
+    Utf8Iterator begin{buffer.iterator_at(selection.cursor()), buffer};
+    if (begin == buffer.begin())
+        return {};
+
+    Utf8Iterator end = begin;
+    if (categorize<word_type>(*end, extra_word_chars) !=
+        categorize<word_type>(*(end-1), extra_word_chars))
+        --end;
+
+    skip_while_reverse(end, buffer.begin(), [](Codepoint c){ return is_eol(c); });
+
+    auto is_word = [&](Codepoint c) { return Kakoune::is_word<word_type>(c, extra_word_chars); };
+    auto is_punctuation = [&](Codepoint c) { return Kakoune::is_punctuation(c, extra_word_chars); };
+
+    bool with_end = skip_while_reverse(end, buffer.begin(), is_horizontal_blank);
+    if (is_word(*end))
+        with_end = skip_while_reverse(end, buffer.begin(), is_word);
+    else if (is_punctuation(*end))
+        with_end = skip_while_reverse(end, buffer.begin(), is_punctuation);
+
+    return utf8_range(begin == end ? begin : begin-1, with_end ? end : end+1);
+}
+template Optional<Selection> select_to_word_begin<WordType::Word>(const Context&, const Selection&);
+template Optional<Selection> select_to_word_begin<WordType::WORD>(const Context&, const Selection&);
+
+template<WordType word_type>
+Optional<Selection>
 select_word(const Context& context, const Selection& selection,
             int count, ObjectFlags flags)
 {
